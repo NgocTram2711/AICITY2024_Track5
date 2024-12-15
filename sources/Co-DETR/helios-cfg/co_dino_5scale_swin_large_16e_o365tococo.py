@@ -1,8 +1,8 @@
 _base_ = [
-    '/base/helios-cfg/co_dino_5scale_r50_1x_coco.py'
+    'co_dino_5scale_r50_1x_coco.py'
 ]
 
-load_from = 'models/co_dino_5scale_swin_large_22e_o365.pth'
+load_from = 'models/co_dino_5scale_swin_large_16e_o365tococo.pth'
 pretrained = None
 dataset_type = "CocoDataset"
 classes = ('motorbike', 'DHelmet', 'DNoHelmet', 'P1Helmet', 'P1NoHelmet', 'P2Helmet', 'P2NoHelmet', 'P0Helmet', 'P0NoHelmet')

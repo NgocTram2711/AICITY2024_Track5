@@ -6,20 +6,27 @@ import argparse
 
 
 def process(imglist, in_imgpath, in_labelpath, out_imgpath, out_labelpath):
+    print("process begin")
     for fname in imglist:
+        print(fname)
         fname_woext = ".".join(fname.split(".")[:-1])
-
+        print("fname_woext", fname_woext)
         img_pattern = "%s/%s.*" % (in_imgpath, fname_woext)
         fimgpath = glob.glob(img_pattern)[0]
+        print("fimgpath", fimgpath)
 
         label_pattern = "%s/%s.*" % (in_labelpath, fname_woext)
+        print("label_pattern", label_pattern)
         if len(glob.glob(label_pattern)) == 0:
+            print("length label_pattern", len(glob.glob(label_pattern)))
             continue
         flabelpath = glob.glob(label_pattern)[0]
         flabelname = flabelpath.split("/")[-1]
 
         new_fimgpath = os.path.join(out_imgpath, fname)
+        print("new_fimgpath", new_fimgpath)
         new_flabelpath = os.path.join(out_labelpath, flabelname)
+        print("new_flabelpath", new_flabelpath)
         print("Copying %s to %s" % (fimgpath, new_fimgpath))
         shutil.copy(fimgpath, new_fimgpath)
         print("Copying %s to %s" % (flabelpath, new_flabelpath))
@@ -89,11 +96,14 @@ if __name__ == "__main__":
     parser.add_argument('--test_percent', type=int, default=20, help='Percentage of test set')
     parser.add_argument('--val_percent', type=int, default=0, help='Percentage of val set')
     args = parser.parse_args()
+    
 
     basepath = args.basepath
+    print(basepath)
     imgpath = os.path.join(basepath,args.imgpath)
     labelpath = os.path.join(basepath,args.labelpath)
     train_percent = args.train_percent
     test_percent = args.test_percent
     val_percent = args.val_percent
+    print("split begin")
     split(basepath, imgpath, labelpath, train_percent, test_percent, val_percent)

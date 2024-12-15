@@ -19,8 +19,8 @@ class GroupSampler(Sampler):
         for i, size in enumerate(self.group_sizes):
             self.num_samples += int(np.ceil(
                 size / self.samples_per_gpu)) * self.samples_per_gpu
-
     def __iter__(self):
+        print("self.flag", self.flag)
         indices = []
         for i, size in enumerate(self.group_sizes):
             if size == 0:

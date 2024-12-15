@@ -1,5 +1,5 @@
 dataset_type = 'CocoDataset'
-data_root = '/data/aicity2024_track5/'
+data_root = '/data/aicity2024_track5_train/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -91,9 +91,9 @@ data = dict(
     train=dict(
         type='CocoDataset',
         ann_file=
-        '/data/aicity2024_track5/train.json',
+        '../../data/aicity2024_track5_train/train.json',
         img_prefix=
-        '/data/aicity2024_track5/train_img/',
+        '../../data/aicity2024_track5_train/train_img/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', with_bbox=True),
@@ -171,9 +171,9 @@ data = dict(
     val=dict(
         type='CocoDataset',
         ann_file=
-        '/data/aicity2024_track5/test.json',
+        '/data/aicity2024_track5_train/test.json',
         img_prefix=
-        '/data/aicity2024_track5/test_img/',
+        '/data/aicity2024_track5_train/test_img/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -196,9 +196,9 @@ data = dict(
     test=dict(
         type='CocoDataset',
         ann_file=
-        '/data/aicity2024_track5/test.json',
+        '/data/aicity2024_track5_train/test.json',
         img_prefix=
-        '/data/aicity2024_track5/test_img/',
+        '/data/aicity2024_track5_train/test_img/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(

@@ -1,6 +1,6 @@
 _base_ = [
-    '/base/helios-cfg/coco_detection.py',
-    '/base/helios-cfg/default_runtime.py'
+    'coco_detection.py',
+    'default_runtime.py'
 ]
 # model settings
 num_dec_layer = 6

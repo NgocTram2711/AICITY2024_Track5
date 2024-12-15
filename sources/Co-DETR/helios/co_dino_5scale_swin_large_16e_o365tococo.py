@@ -1,5 +1,5 @@
 dataset_type = 'CocoDataset'
-data_root = '/data/aicity2024_track5/'
+data_root = '../../data/aicity2024_track5_train/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -90,8 +90,8 @@ data = dict(
     workers_per_gpu=1,
     train=dict(
         type='CocoDataset',
-        ann_file='/data/aicity2024_track5/train.json',
-        img_prefix='/data/aicity2024_track5/train_img/',
+        ann_file='../../data/aicity2024_track5_train/train.json',
+        img_prefix='../../data/aicity2024_track5_train/train_img/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', with_bbox=True),
@@ -170,8 +170,8 @@ data = dict(
         filter_empty_gt=False),
     val=dict(
         type='CocoDataset',
-        ann_file='/data/aicity2024_track5/test.json',
-        img_prefix='/data/aicity2024_track5/test_img/',
+        ann_file='../../data/aicity2024_track5_train/test.json',
+        img_prefix='../../data/aicity2024_track5_train/test_img/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -195,8 +195,8 @@ data = dict(
                  'P2Helmet', 'P2NoHelmet', 'P0Helmet', 'P0NoHelmet')),
     test=dict(
         type='CocoDataset',
-        ann_file='/data/aicity2024_track5/test.json',
-        img_prefix='/data/aicity2024_track5/test_img/',
+        ann_file='../../data/aicity2024_track5_train/test.json',
+        img_prefix='../../data/aicity2024_track5_train/test_img/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -224,7 +224,7 @@ log_config = dict(interval=50, hooks=[dict(type='TextLoggerHook')])
 custom_hooks = [dict(type='NumClassCheckHook')]
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = 'models/co_dino_5scale_swin_large_22e_o365.pth'
+load_from = 'models/co_dino_5scale_swin_large_16e_o365tococo.pth'
 resume_from = None
 workflow = [('train', 1)]
 opencv_num_threads = 0

@@ -108,7 +108,7 @@ def parse_args():
 
 def main():
     args = parse_args()
-
+    print('args.config', args.config)
     cfg = Config.fromfile(args.config)
 
     # replace the ${key} with the value of cfg.key
@@ -140,6 +140,7 @@ def main():
         torch.backends.cudnn.benchmark = True
 
     # work_dir is determined in this priority: CLI > segment in file > filename
+    print('args.work_dir', args.work_dir)
     if args.work_dir is not None:
         # update configs according to CLI args if args.work_dir is not None
         cfg.work_dir = args.work_dir
@@ -178,7 +179,12 @@ def main():
     # create work_dir
     mmcv.mkdir_or_exist(osp.abspath(cfg.work_dir))
     # dump config
-    cfg.dump(osp.join(cfg.work_dir, osp.basename(args.config)))
+    print('args.config', args.config)
+    print('cfg.work_dir', cfg.work_dir)
+    print('osp.basename(args.config)', osp.basename(args.config))
+    print('osp.join', osp.join(cfg.work_dir, osp.basename(args.config)))
+    # cfg.dump(osp.join(cfg.work_dir, osp.basename(args.config)))
+    cfg.dump('helios/co_dino_5scale_swin_large_16e_o365tococo.py')
     # init the logger before other steps
     timestamp = time.strftime('%Y%m%d_%H%M%S', time.localtime())
     log_file = osp.join(cfg.work_dir, f'{timestamp}.log')
@@ -215,7 +221,7 @@ def main():
         train_cfg=cfg.get('train_cfg'),
         test_cfg=cfg.get('test_cfg'))
     model.init_weights()
-
+    print('cfg.data.train', cfg.data.train)
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:
         assert 'val' in [mode for (mode, _) in cfg.workflow]
