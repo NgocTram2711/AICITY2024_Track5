@@ -30,39 +30,6 @@ def process_video(dataset, vid):
             dataset[vid][fid]['motor'] = []
         result += process_objects(vid, fid, dataset[vid][fid]['human'], dataset[vid][fid]['motor'])
     return result
-#
-# def Virtural_Expander(data: list, conf_thresh_human=0.3, conf_thresh_motor=0.5, iou_thresh=0.5):
-#     dataset = {}
-#     for line in data:
-#         vid, fid, left, top, width, height, cls, conf = line
-#         conf = float(conf)
-#         cls = int(float(cls))
-#
-#         if conf < (conf_thresh_human if cls != 1 else conf_thresh_motor):
-#             continue  # Bỏ qua những box có confidence thấp hơn ngưỡng
-#
-#         if vid not in dataset:
-#             dataset[vid] = {}
-#         if fid not in dataset[vid]:
-#             dataset[vid][fid] = {'human': [], 'motor': []}
-#
-#         # Gán đối tượng vào đúng danh mục
-#         if cls != 1:  # human
-#             dataset[vid][fid]['human'].append(Human(bbox=[float(left), float(top), float(width), float(height), float(cls), conf]))
-#         else:  # motor
-#             dataset[vid][fid]['motor'].append(Motor(bbox=[float(left), float(top), float(width), float(height), float(cls), conf]))
-#
-#     # Gộp và xử lý kết quả
-#     results = ''
-#     for vid in tqdm(dataset.keys()):
-#         for fid in dataset[vid].keys():
-#             # Lọc các box chồng lấn (IoU)
-#             dataset[vid][fid]['human'] = apply_nms(dataset[vid][fid]['human'], iou_thresh)
-#             dataset[vid][fid]['motor'] = apply_nms(dataset[vid][fid]['motor'], iou_thresh)
-#
-#             # Tạo box ảo
-#             results += process_objects(vid, fid, dataset[vid][fid]['human'], dataset[vid][fid]['motor'])
-#     return results
 
 def calculate_iou(box1, box2):
     # box format: [x1, y1, x2, y2]
